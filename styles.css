@@ -1,74 +1,29 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f3e9;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-}
+const calendar = document.querySelector('.calendar');
+const today = new Date();
+const currentDay = today.getDate();
 
-.calendar-container {
-    text-align: center;
-    max-width: 600px;
-}
+// Example for unlocked surprises
+const surprises = {
+    1: "You get a sweet note: 'You're the best!'",
+    5: "A link to your favorite song!",
+    12: "An e-card with love ❤️",
+    // Add surprises as needed
+};
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
+for (let i = 1; i <= 25; i++) {
+    const door = document.createElement('div');
+    door.classList.add('door', i > currentDay ? 'locked' : 'unlocked');
+    door.innerHTML = `
+        <span>${i}</span>
+        <div class="content">${surprises[i] || "Coming soon!"}</div>
+    `;
 
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
+    door.addEventListener('click', () => {
+        if (!door.classList.contains('locked')) {
+            const content = door.querySelector('.content');
+            content.style.display = 'flex';
+        }
+    });
 
-.door {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    background: #d4af37;
-    color: #fff;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: transform 0.3s;
-}
-
-.door:hover {
-    transform: scale(1.1);
-}
-
-.door.locked {
-    background: #8b0000;
-    cursor: not-allowed;
-}
-
-.door .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #fff;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 8px;
-    display: none;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.door.unlocked .content {
-    display: flex;
+    calendar.appendChild(door);
 }
