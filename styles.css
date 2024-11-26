@@ -4,9 +4,9 @@ const currentDay = today.getDate();
 
 // Example for unlocked surprises
 const surprises = {
-    1: "You get a sweet note: 'You're the best!'",
-    5: "A link to your favorite song!",
-    12: "An e-card with love ❤️",
+    1: "TES6",
+    5: "TETX8",
+    12: "TEST4324",
     // Add surprises as needed
 };
 
